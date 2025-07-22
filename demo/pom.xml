@@ -12,7 +12,7 @@
 	<groupId>fr.m2i</groupId>
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
+	<n>demo</n>
 	<description>Demo project for Spring Boot</description>
 	<url />
 	<licenses>

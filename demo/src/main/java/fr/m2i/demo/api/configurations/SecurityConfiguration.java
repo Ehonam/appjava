@@ -45,7 +45,7 @@ public class SecurityConfiguration {
 	@Bean
 	public JwtDecoder jwtDecoder() {
 		byte[] bytes = securityProperties.getKey().getBytes();
-		SecretKeySpec secretKey = new SecretKeySpec(bytes, 0, bytes.length, "RSA");
+		SecretKeySpec secretKey = new SecretKeySpec(bytes, "HmacSHA256");
 		return NimbusJwtDecoder.withSecretKey(secretKey).macAlgorithm(MacAlgorithm.HS256).build();
 	}
 
@@ -70,7 +70,8 @@ public class SecurityConfiguration {
 	public CorsFilter corsFilter() {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowCredentials(true);
+		// Fix: Cannot use allowCredentials(true) with allowedOrigin("*")
+		config.setAllowCredentials(false); // Set to false to allow "*" origin
 		config.addAllowedOrigin("*");
 		config.addAllowedHeader("*");
 		config.addAllowedMethod("*");
